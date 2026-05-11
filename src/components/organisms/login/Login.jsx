@@ -42,102 +42,93 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 p-6">
-      <div className="w-full max-w-md bg-white p-10 rounded-3xl shadow-sm border border-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-bg-light p-6">
+      <div className="w-full max-w-md bg-white p-10 rounded-[2rem] shadow-xl shadow-primary/5 border border-gray-100">
 
         {/* Header con Icono */}
-        <div className="flex flex-col items-center mb-12">
-          <div className="mb-4">
-            {/* Icono similar al de la imagen */}
-            <img src={smile} alt="Smile Icon" className="w-[64px] h-[64px]" />
+        <div className="flex flex-col items-center mb-10">
+          <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-4 transition-transform hover:scale-110">
+            <img src={smile} alt="Smile Icon" className="w-10 h-10 object-contain" />
           </div>
-          <h1 className="text-4xl font-bold text-slate-800 mb-2">Welcome!</h1>
-          <p className="text-slate-400 text-lg">Sign in to your account</p>
+          <h1 className="text-3xl font-bold text-text-heading tracking-tight">¡Bienvenido!</h1>
+          <p className="text-text-body mt-2">Ingresa a tu cuenta de MyStore</p>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+          <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm rounded-r-lg flex items-center gap-3">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
             {error}
           </div>
         )}
 
-        <form className="space-y-10" onSubmit={handleSubmit}>
-
+        <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Input de Email */}
-          <div className="relative group">
-            <label className="block text-slate-400 text-lg mb-1 group-focus-within:text-blue-500 transition-colors">
-              Email
-            </label>
-            <div className="relative border-b border-gray-200 group-focus-within:border-blue-500 transition-all">
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Email</label>
+            <div className="relative group">
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full py-2 bg-transparent focus:outline-none text-slate-700 pr-10"
+                className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300 text-text-heading"
+                placeholder="correo@ejemplo.com"
                 required
               />
-              <span className="absolute right-0 top-2 text-slate-300">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+              <span className="absolute right-4 top-3.5 text-gray-300 group-focus-within:text-primary transition-colors">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </span>
             </div>
           </div>
 
           {/* Input de Password */}
-          <div className="relative group">
-            <label className="block text-slate-400 text-lg mb-1 group-focus-within:text-blue-500 transition-colors">
-              Password
-            </label>
-            <div className="relative border-b border-gray-200 group-focus-within:border-blue-500 transition-all">
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">Contraseña</label>
+            <div className="relative group">
               <input
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full py-2 bg-transparent focus:outline-none text-slate-700 pr-10"
+                className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300 text-text-heading"
+                placeholder="••••••••"
                 required
               />
-              <span className="absolute right-0 top-2 text-slate-300 cursor-pointer hover:text-blue-500 transition-colors">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+              <span className="absolute right-4 top-3.5 text-gray-300 group-focus-within:text-primary transition-colors">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               </span>
             </div>
           </div>
 
-          {/* Opciones de Remember y Forgot */}
-          <div className="flex items-center justify-between text-slate-400">
-            <label className="flex items-center space-x-3 cursor-pointer">
-              <input
-                type="checkbox"
-                className="w-5 h-5 border-gray-300 rounded focus:ring-blue-500 transition-all"
-              />
-              <span className="text-lg">remember me?</span>
+          <div className="flex items-center justify-between text-xs font-semibold text-gray-500">
+            <label className="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
+              <input type="checkbox" className="rounded border-gray-300 text-primary focus:ring-primary/20" />
+              Recordarme
             </label>
-            <a href="#" className="text-blue-500 hover:text-blue-600 transition-colors text-lg">
-              forgot password?
-            </a>
+            <a href="#" className="hover:text-primary transition-colors">¿Olvidaste tu contraseña?</a>
           </div>
 
           {/* Botón de Login */}
           <button
             type="submit"
-            className="w-3/5 py-4 btn-dna hover:bg-blue-700 text-white font-bold rounded-xl flex items-center justify-center space-x-3 transition-all shadow-lg shadow-blue-200 active:scale-95"
+            className="w-full py-4 primary-btn !rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-3 active:scale-95 transition-all"
           >
-            <span className="text-xl">Login</span>
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              strokeWidth="2.5"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            Entrar
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </button>
-
+          
+          <p className="text-center text-sm text-text-body pt-4">
+            ¿No tienes cuenta? <Link to="/register" className="text-primary font-bold hover:underline">Regístrate</Link>
+          </p>
         </form>
       </div>
     </div>

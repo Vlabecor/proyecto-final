@@ -2,11 +2,13 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { subscribeToAuthChanges } from '../../../services/authService';
 import useCartStore from '../../../store/cartStore';
+import useProductStore from '../../../store/productStore';
 
 export default function NavBar() {
   const location = useLocation();
   const [loggedInUser, setLoggedInUser] = useState(null);
   const totalItems = useCartStore((state) => state.getTotalItems());
+  const { searchTerm, setSearchTerm } = useProductStore();
 
   useEffect(() => {
     const unsubscribe = subscribeToAuthChanges((currentUser) => {
@@ -34,6 +36,8 @@ export default function NavBar() {
             <div className="relative w-full">
               <input
                 type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Buscar productos..."
                 className="w-full bg-gray-50 border border-gray-100 rounded-full py-2 px-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300"
               />

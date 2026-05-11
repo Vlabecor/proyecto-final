@@ -6,10 +6,16 @@ import Hero from "../Hero/Hero";
 const ITEMS_PER_PAGE = 8;
 
 export default function Gallery() {
-  const { products, loading, fetchProducts } = useProductStore();
-  const [searchTerm, setSearchTerm] = useState("");
+  const { 
+    products, 
+    loading, 
+    fetchProducts, 
+    searchTerm, 
+    setSearchTerm, 
+    selectedCategory, 
+    setSelectedCategory 
+  } = useProductStore();
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState("all");
   const galleryRef = useRef(null);
 
   useEffect(() => {
