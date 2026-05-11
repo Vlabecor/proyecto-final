@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import ProductCard from "../../molecules/ProductCard";
 import useProductStore from "../../../store/productStore";
+import Hero from "../Hero/Hero";
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 8;
 
 export default function Gallery() {
   const { products, loading, fetchProducts } = useProductStore();
@@ -14,7 +15,6 @@ export default function Gallery() {
   }, [fetchProducts]);
 
   const filteredProducts = useMemo(() => {
-    // TODO ESTUDIANTE: extender busqueda por categoria y precio.
     const normalized = searchTerm.trim().toLowerCase();
     if (!normalized) return products;
 
@@ -42,40 +42,45 @@ export default function Gallery() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
   }
 
   return (
-    <section className="p-6">
-      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
-        <div>
-          <h2 className="text-2xl font-bold">Nuestros Productos</h2>
-          <p className="text-sm text-gray-500 mt-1">
-            {filteredProducts.length} resultado(s)
-          </p>
-        </div>
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          placeholder="Buscar por nombre o descripción..."
-          className="w-full sm:w-80 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-200 focus:border-purple-500"
-        />
-      </div>
-
-      {filteredProducts.length === 0 ? (
-        <div className="bg-white border border-gray-200 rounded-xl p-8 text-center text-gray-500">
-          No se encontraron productos para esa búsqueda.
-        </div>
-      ) : (
-        <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-            {visibleProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+    <>
+      <Hero />
+      <section className="section-padding bg-bg-light min-h-screen">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight text-text-heading">Nuestros Productos</h2>
+            <p className="text-sm text-text-body mt-2">
+              Explora nuestra colección exclusiva ({filteredProducts.length} resultados)
+            </p>
           </div>
+          <div className="relative w-full md:w-96">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              placeholder="Buscar por nombre o descripción..."
+              className="w-full px-5 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300"
+            />
+          </div>
+        </div>
+
+        {filteredProducts.length === 0 ? (
+          <div className="bg-white border border-gray-100 rounded-2xl p-16 text-center text-text-body shadow-sm">
+            No se encontraron productos para esa búsqueda.
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+              {visibleProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
 
           <div className="flex justify-center items-center gap-2 mt-8 flex-wrap">
             <button
@@ -114,6 +119,8 @@ export default function Gallery() {
           </div>
         </>
       )}
+      </div>
     </section>
+    </>
   );
 }
