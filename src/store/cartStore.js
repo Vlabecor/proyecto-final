@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-const STORAGE_KEY = "template-cart-store";
+const STORAGE_KEY = "mystore-cart-storage";
 
 const useCartStore = create(
   persist(
