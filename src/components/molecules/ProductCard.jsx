@@ -2,12 +2,10 @@ import ProductImage from "../atoms/product/ProductImage";
 import ProductTitle from "../atoms/product/ProductTitle";
 import ProductRate from "../atoms/product/ProductRate";
 import ProductPrice from "../atoms/product/ProductPrice";
-import { imageMap } from "../../assets/imageMap";
 import { Link } from "react-router-dom";
 import useCartStore from "../../store/cartStore";
 
 function ProductCard({ product }) {
-    const resolvedImage = imageMap[product.image] ?? product.image;
     const addItem = useCartStore((state) => state.addItem);
 
     const handleAddToCart = (e) => {
@@ -21,7 +19,7 @@ function ProductCard({ product }) {
             to={`/product/${product.id}`} 
             className="group block bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 w-full max-w-[280px]"
         >
-            <ProductImage src={resolvedImage} alt={product.title} />
+            <ProductImage src={product.image} alt={product.title} />
             <div className="p-5">
                 <ProductRate rate={product.rate} />
                 <ProductTitle title={product.title} />

@@ -105,6 +105,7 @@ export default function Gallery() {
               type="button"
               onClick={() => {
                 setSelectedCategory(cat);
+                setSearchTerm("");
                 setCurrentPage(1);
               }}
               className={`px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 border ${
@@ -113,7 +114,7 @@ export default function Gallery() {
                   : "bg-white text-text-body border-gray-100 hover:border-primary hover:text-primary"
               }`}
             >
-              {cat === "all" ? "Todo" : cat}
+              {cat === "all" ? "Todo" : cat.charAt(0).toUpperCase() + cat.slice(1)}
             </button>
           ))}
         </div>
@@ -152,12 +153,12 @@ export default function Gallery() {
               ))}
             </div>
 
-          <div className="flex justify-center items-center gap-3 mt-16 flex-wrap">
+          <div className="flex justify-center items-center gap-2 md:gap-3 mt-16 flex-wrap">
             <button
               type="button"
               onClick={() => goToPage(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-6 py-2 rounded-full border border-gray-200 text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed hover:border-primary hover:text-primary transition-all duration-300 bg-white"
+              className="px-4 md:px-6 py-2 rounded-full border border-gray-200 text-[12px] md:text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed hover:border-primary hover:text-primary transition-all duration-300 bg-white shadow-sm"
             >
               Anterior
             </button>
@@ -182,7 +183,7 @@ export default function Gallery() {
               type="button"
               onClick={() => goToPage(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-6 py-2 rounded-full border border-gray-200 text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed hover:border-primary hover:text-primary transition-all duration-300 bg-white"
+              className="px-4 md:px-6 py-2 rounded-full border border-gray-200 text-[12px] md:text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed hover:border-primary hover:text-primary transition-all duration-300 bg-white shadow-sm"
             >
               Siguiente
             </button>
