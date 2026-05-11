@@ -1,18 +1,32 @@
-import MOCK_PRODUCTS from "../mockdata/mock_products";
+const API_URL = "https://fakestoreapi.com/products";
 
 export const getProducts = async () => {
-  // TODO ESTUDIANTE:
-  // Reemplaza este retorno local por FakeStore API.
-  // Ejemplo esperado: GET https://fakestoreapi.com/products
-  return [...MOCK_PRODUCTS].sort((a, b) => Number(a.id) - Number(b.id));
+  try {
+    const response = await fetch(API_URL);
+    const data = await response.json();
+    
+    // Mapeamos los datos para que sean compatibles con nuestro ProductCard
+    return data.map(product => ({
+      ...product,
+      rate: product.rating?.rate || 0 // Extraemos el rate para que funcione nuestro componente ProductRate
+    }));
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
 };
 
 export const getProductById = async (id) => {
-  // TODO ESTUDIANTE:
-  // Reemplaza esta busqueda local por FakeStore API.
-  // Ejemplo esperado: GET https://fakestoreapi.com/products/{id}
-  const product = MOCK_PRODUCTS.find(
-    (item) => Number(item.id) === Number(id),
-  );
-  return product ?? null;
+  try {
+    const response = await fetch(`${API_URL}/${id}`);
+    const product = await response.json();
+    
+    return {
+      ...product,
+      rate: product.rating?.rate || 0
+    };
+  } catch (error) {
+    console.error(`Error fetching product ${id}:`, error);
+    return null;
+  }
 };

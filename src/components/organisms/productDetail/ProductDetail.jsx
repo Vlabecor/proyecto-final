@@ -134,11 +134,10 @@ export default function ProductDetail() {
                             {/* Add to cart button */}
                             <button
                                 onClick={handleAddToCart}
-                                className={`w-full py-3 rounded-xl font-semibold text-white text-lg transition-all duration-300 ${
-                                    added
+                                className={`w-full py-3 rounded-xl font-semibold text-white text-lg transition-all duration-300 ${added
                                         ? 'bg-green-500 scale-95'
                                         : 'bg-gradient-to-r from-purple-500 via-purple-600 to-pink-500 hover:opacity-90 hover:shadow-lg hover:shadow-purple-200 active:scale-95'
-                                }`}
+                                    }`}
                             >
                                 {added ? '✓ Agregado al carrito' : 'Agregar al carrito'}
                             </button>
