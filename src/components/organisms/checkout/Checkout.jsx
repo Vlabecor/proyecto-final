@@ -1,13 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import useCartStore from "../../../store/cartStore";
+import { saveOrder } from "../../../services/firestoreService";
 
 export default function Checkout() {
   const { items, getTotalPrice, clearCart } = useCartStore();
   const navigate = useNavigate();
 
-  const handlePayment = (e) => {
+  const handlePayment = async (e) => {
     e.preventDefault();
-    // Simulamos el proceso de pago
+    // Guardar pedido en Firestore antes de limpiar el carrito
+    const total = getTotalPrice();
+    await saveOrder(items, total);
     clearCart();
     navigate("/order-success");
   };
