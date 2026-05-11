@@ -6,10 +6,10 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
             <h2 className="text-2xl font-bold tracking-tighter mb-4">
-              WATCH<span className="text-primary">.</span>
+              MyStore<span className="text-primary">.</span>
             </h2>
             <p className="text-gray-400 text-sm">
-              The best place to find your next luxury timepiece. Elegant, precise, and timeless.
+              The best place to find your favorite products. Quality, style, and trust.
             </p>
           </div>
 

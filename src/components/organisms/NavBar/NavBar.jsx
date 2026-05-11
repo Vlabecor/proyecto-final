@@ -25,7 +25,7 @@ export default function NavBar() {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <h2 className="text-2xl font-bold tracking-tighter text-text-heading">
-              WATCH<span className="text-primary">.</span>
+              MyStore<span className="text-primary">.</span>
             </h2>
           </Link>
 

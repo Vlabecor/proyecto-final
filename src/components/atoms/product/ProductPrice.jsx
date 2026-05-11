@@ -1,7 +1,7 @@
 function ProductPrice({ price }) {
     return (    
-        <div className="text-xl font-semibold text-gray-900">
-            ${price}
+        <div className="text-lg font-bold text-primary mt-1">
+            ${Number(price).toFixed(2)}
         </div>
     );
 }
