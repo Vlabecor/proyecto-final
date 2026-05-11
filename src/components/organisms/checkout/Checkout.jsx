@@ -19,32 +19,63 @@ export default function Checkout() {
         <h1 className="text-4xl font-bold text-text-heading mb-12 tracking-tight">Finalizar Compra</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Columna Izquierda: Formulario (Placeholder para el siguiente commit) */}
+          
+          {/* Columna Izquierda: Formularios */}
           <div className="lg:col-span-7 space-y-8">
+            
+            {/* Información de Envío */}
             <div className="bg-white p-8 rounded-[2rem] shadow-xl shadow-primary/5 border border-gray-100">
               <h3 className="text-xl font-bold text-text-heading mb-8">Información de Envío</h3>
-              
               <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2 md:col-span-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Nombre Completo</label>
                   <input type="text" className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Ej. Juan Pérez" required />
                 </div>
-                
                 <div className="space-y-2 md:col-span-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Dirección de Entrega</label>
                   <input type="text" className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Calle, número, apto..." required />
                 </div>
-
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Ciudad</label>
                   <input type="text" className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Ej. Medellín" required />
                 </div>
-
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Teléfono</label>
                   <input type="tel" className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="300 000 0000" required />
                 </div>
               </form>
+            </div>
+
+            {/* Información de Pago */}
+            <div className="bg-white p-8 rounded-[2rem] shadow-xl shadow-primary/5 border border-gray-100">
+              <div className="flex items-center justify-between mb-8">
+                <h3 className="text-xl font-bold text-text-heading">Método de Pago</h3>
+                <div className="flex gap-2">
+                  <div className="w-8 h-5 bg-gray-100 rounded-sm"></div>
+                  <div className="w-8 h-5 bg-gray-100 rounded-sm"></div>
+                  <div className="w-8 h-5 bg-gray-100 rounded-sm"></div>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2 md:col-span-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Número de Tarjeta</label>
+                  <div className="relative">
+                    <input type="text" className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="0000 0000 0000 0000" required />
+                    <svg className="w-6 h-6 absolute right-4 top-2.5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Expiración</label>
+                  <input type="text" className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="MM / YY" required />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">CVV</label>
+                  <input type="password" size="3" maxLength="3" className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="***" required />
+                </div>
+              </div>
             </div>
           </div>
 
