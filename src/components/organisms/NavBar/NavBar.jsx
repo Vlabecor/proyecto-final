@@ -9,11 +9,6 @@ export default function NavBar() {
   const totalItems = useCartStore((state) => state.getTotalItems());
 
   useEffect(() => {
-    /*
-      // BACKUP: OLD LOCALSTORAGE METHOD
-      // const user = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
-      // setLoggedInUser(user);
-    */
     const unsubscribe = subscribeToAuthChanges((currentUser) => {
       setLoggedInUser(currentUser);
     });
@@ -23,106 +18,90 @@ export default function NavBar() {
 
   const isActive = (path) => location.pathname === path;
 
-  /*
-    // BACKUP: OLD LOCALSTORAGE METHOD
-    // const handleLogout = () => {
-    //   localStorage.removeItem('loggedInUser');
-    //   setLoggedInUser(null);
-    //   navigate('/login');
-    // };
-  */
-
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <header className="sticky top-0 z-50 bg-white shadow-sm font-sans">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link 
-            to="/" 
-            className="flex items-center space-x-2 text-2xl font-bold hover:opacity-80 transition-opacity"
-          >
-            <span className="bg-gradient-to-r from-purple-500 via-purple-600 to-pink-500 bg-clip-text text-transparent">
-              MyStore
-            </span>
+          <Link to="/" className="flex items-center">
+            <h2 className="text-2xl font-bold tracking-tighter text-text-heading">
+              WATCH<span className="text-primary">.</span>
+            </h2>
           </Link>
 
           {/* Navigation Links */}
-          <ul className="hidden md:flex items-center space-x-8">
-            <li>
-              <Link
-                to="/gallery"
-                className={`text-base font-medium transition-all duration-300 pb-2 border-b-2 ${
-                  isActive('/gallery')
-                    ? 'text-blue-600 border-blue-600'
-                    : 'text-gray-600 border-transparent hover:text-gray-900 hover:border-gray-300'
-                }`}
-              >
-                Gallery
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/cart"
-                className={`text-base font-medium transition-all duration-300 pb-2 border-b-2 ${
-                  isActive('/cart')
-                    ? 'text-blue-600 border-blue-600'
-                    : 'text-gray-600 border-transparent hover:text-gray-900 hover:border-gray-300'
-                }`}
-              >
-                Cart ({totalItems})
-              </Link>
-            </li>
-            {loggedInUser ? (
+          <nav className="hidden md:flex items-center space-x-8">
+            <ul className="flex items-center space-x-8 text-[12px] font-semibold uppercase tracking-widest">
               <li>
                 <Link
-                  to="/profile"
-                  className={`text-base font-medium transition-all duration-300 pb-2 border-b-2 ${
-                    isActive('/profile')
-                      ? 'text-blue-600 border-blue-600'
-                      : 'text-gray-600 border-transparent hover:text-gray-900 hover:border-gray-300'
-                  }`}
+                  to="/gallery"
+                  className={`${
+                    isActive('/gallery') ? 'text-primary' : 'text-text-heading hover:text-primary'
+                  } transition-colors duration-300`}
                 >
-                  Profile
+                  Home
                 </Link>
               </li>
-            ) : (
-              <>
+              <li>
+                <Link
+                  to="/cart"
+                  className={`${
+                    isActive('/cart') ? 'text-primary' : 'text-text-heading hover:text-primary'
+                  } transition-colors duration-300 flex items-center gap-2`}
+                >
+                  Cart 
+                  {totalItems > 0 && (
+                    <span className="bg-primary text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center">
+                      {totalItems}
+                    </span>
+                  )}
+                </Link>
+              </li>
+              {loggedInUser ? (
                 <li>
                   <Link
-                    to="/login"
-                    className={`text-base font-medium transition-all duration-300 pb-2 border-b-2 ${
-                      isActive('/login')
-                        ? 'text-blue-600 border-blue-600'
-                        : 'text-gray-600 border-transparent hover:text-gray-900 hover:border-gray-300'
-                    }`}
+                    to="/profile"
+                    className={`${
+                      isActive('/profile') ? 'text-primary' : 'text-text-heading hover:text-primary'
+                    } transition-colors duration-300`}
                   >
-                    Login
+                    Profile
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="/register"
-                    className={`text-base font-medium transition-all duration-300 pb-2 border-b-2 ${
-                      isActive('/register')
-                        ? 'text-blue-600 border-blue-600'
-                        : 'text-gray-600 border-transparent hover:text-gray-900 hover:border-gray-300'
-                    }`}
-                  >
-                    Register
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
+              ) : (
+                <>
+                  <li>
+                    <Link
+                      to="/login"
+                      className={`${
+                        isActive('/login') ? 'text-primary' : 'text-text-heading hover:text-primary'
+                      } transition-colors duration-300`}
+                    >
+                      Login
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/register"
+                      className="primary-btn !py-2 !px-6 !text-[10px]"
+                    >
+                      Register
+                    </Link>
+                  </li>
+                </>
+              )}
+            </ul>
+          </nav>
 
-          {/* Mobile Menu Button (opcional para futuro) */}
-          <button className="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-50">
+          {/* Mobile Menu Button */}
+          <button className="md:hidden text-text-heading">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
         </div>
       </div>
-    </nav>
+    </header>
   );
 }
+
