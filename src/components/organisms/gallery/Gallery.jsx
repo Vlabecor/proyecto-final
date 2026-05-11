@@ -82,12 +82,12 @@ export default function Gallery() {
               ))}
             </div>
 
-          <div className="flex justify-center items-center gap-2 mt-8 flex-wrap">
+          <div className="flex justify-center items-center gap-3 mt-16 flex-wrap">
             <button
               type="button"
               onClick={() => goToPage(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-3 py-2 rounded-lg border border-gray-300 text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50"
+              className="px-6 py-2 rounded-full border border-gray-200 text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed hover:border-primary hover:text-primary transition-all duration-300 bg-white"
             >
               Anterior
             </button>
@@ -98,10 +98,10 @@ export default function Gallery() {
                   key={page}
                   type="button"
                   onClick={() => goToPage(page)}
-                  className={`w-9 h-9 rounded-lg text-sm font-medium border ${
+                  className={`w-10 h-10 rounded-full text-sm font-semibold transition-all duration-300 border ${
                     page === currentPage
-                      ? "border-purple-600 bg-purple-600 text-white"
-                      : "border-gray-300 hover:bg-gray-50"
+                      ? "border-primary bg-primary text-white shadow-lg scale-110"
+                      : "border-gray-200 text-text-body hover:border-primary hover:text-primary bg-white"
                   }`}
                 >
                   {page}
@@ -112,7 +112,7 @@ export default function Gallery() {
               type="button"
               onClick={() => goToPage(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-3 py-2 rounded-lg border border-gray-300 text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50"
+              className="px-6 py-2 rounded-full border border-gray-200 text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed hover:border-primary hover:text-primary transition-all duration-300 bg-white"
             >
               Siguiente
             </button>
