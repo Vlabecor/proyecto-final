@@ -1,141 +1,97 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import useCartStore from "../../../store/cartStore";
 
 export default function Checkout() {
-  // TODO ESTUDIANTE:
-  // Este checkout debe mantenerse simulado en el taller.
-  // Solo personaliza estilos, estructura visual y textos.
-  const items = useCartStore((state) => state.items);
-  const getTotalPrice = useCartStore((state) => state.getTotalPrice);
-  const clearCart = useCartStore((state) => state.clearCart);
-  const [success, setSuccess] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    address: "",
-  });
-
-  const total = getTotalPrice();
-
-  const handleChange = (event) => {
-    setFormData((prev) => ({ ...prev, [event.target.name]: event.target.value }));
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    clearCart();
-    setSuccess(true);
-  };
-
-  if (success) {
-    return (
-      <section className="max-w-3xl mx-auto px-4 py-12">
-        <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Compra confirmada</h2>
-          <p className="text-gray-500 mb-6">
-            Este checkout es simulado para el taller. Puedes personalizar este flujo.
-          </p>
-          <Link
-            to="/gallery"
-            className="inline-flex px-6 py-3 rounded-lg bg-purple-600 text-white font-medium hover:opacity-90"
-          >
-            Volver a la galeria
-          </Link>
-        </div>
-      </section>
-    );
-  }
-
-  if (items.length === 0) {
-    return (
-      <section className="max-w-3xl mx-auto px-4 py-12">
-        <div className="bg-white border border-gray-200 rounded-2xl p-10 text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
-            No hay productos para pagar
-          </h2>
-          <p className="text-gray-500 mb-6">Agrega productos al carrito antes de ir al checkout.</p>
-          <Link
-            to="/gallery"
-            className="inline-flex px-6 py-3 rounded-lg bg-purple-600 text-white font-medium hover:opacity-90"
-          >
-            Ir a productos
-          </Link>
-        </div>
-      </section>
-    );
-  }
+  const { cart, getTotalPrice } = useCartStore();
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6">Checkout (simulado)</h2>
-      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6">
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white border border-gray-200 rounded-2xl p-6 space-y-4"
-        >
-          <h3 className="text-xl font-semibold text-gray-900">Datos del comprador</h3>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
-            <input
-              required
-              type="text"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-200 focus:border-purple-500"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
-              required
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-200 focus:border-purple-500"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Direccion</label>
-            <input
-              required
-              type="text"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-200 focus:border-purple-500"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full mt-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:opacity-90"
-          >
-            Confirmar compra simulada
-          </button>
-        </form>
+    <div className="min-h-screen bg-bg-light pt-32 pb-20">
+      <div className="container mx-auto px-4">
+        {/* Breadcrumbs */}
+        <nav className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-8">
+          <Link to="/cart" className="hover:text-primary transition-colors">Carrito</Link>
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+          <span className="text-text-heading">Checkout</span>
+        </nav>
 
-        <aside className="bg-white border border-gray-200 rounded-2xl p-6 h-fit">
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">Resumen</h3>
-          <div className="space-y-3 mb-4">
-            {items.map(({ product, quantity }) => (
-              <div key={product.id} className="flex justify-between text-sm">
-                <span className="text-gray-600">
-                  {product.title} x {quantity}
-                </span>
-                <span className="font-medium text-gray-900">
-                  ${(Number(product.price) * Number(quantity)).toFixed(2)}
-                </span>
+        <h1 className="text-4xl font-bold text-text-heading mb-12 tracking-tight">Finalizar Compra</h1>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Columna Izquierda: Formulario (Placeholder para el siguiente commit) */}
+          <div className="lg:col-span-7 space-y-8">
+            <div className="bg-white p-8 rounded-[2rem] shadow-xl shadow-primary/5 border border-gray-100">
+              <h3 className="text-xl font-bold text-text-heading mb-8">Información de Envío</h3>
+              
+              <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2 md:col-span-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Nombre Completo</label>
+                  <input type="text" className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Ej. Juan Pérez" required />
+                </div>
+                
+                <div className="space-y-2 md:col-span-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Dirección de Entrega</label>
+                  <input type="text" className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Calle, número, apto..." required />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Ciudad</label>
+                  <input type="text" className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="Ej. Medellín" required />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Teléfono</label>
+                  <input type="tel" className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" placeholder="300 000 0000" required />
+                </div>
+              </form>
+            </div>
+          </div>
+
+          {/* Columna Derecha: Resumen */}
+          <div className="lg:col-span-5">
+            <div className="bg-white p-8 rounded-[2rem] shadow-xl shadow-primary/5 border border-gray-100 sticky top-32">
+              <h3 className="text-xl font-bold text-text-heading mb-6">Resumen del Pedido</h3>
+              
+              <div className="space-y-4 mb-8 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                {cart.map((item) => (
+                  <div key={item.id} className="flex items-center gap-4 py-2 border-b border-gray-50 last:border-0">
+                    <div className="w-16 h-16 bg-gray-50 rounded-xl overflow-hidden flex-shrink-0">
+                      <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="text-sm font-bold text-text-heading line-clamp-1">{item.title}</h4>
+                      <p className="text-xs text-gray-400">Cantidad: {item.quantity}</p>
+                    </div>
+                    <p className="text-sm font-bold text-primary">${(item.price * item.quantity).toFixed(2)}</p>
+                  </div>
+                ))}
               </div>
-            ))}
+
+              <div className="space-y-3 border-t border-gray-100 pt-6">
+                <div className="flex justify-between text-sm text-text-body font-medium">
+                  <span>Subtotal</span>
+                  <span>${getTotalPrice().toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-sm text-text-body font-medium">
+                  <span>Envío</span>
+                  <span className="text-green-500 font-bold uppercase text-[10px] tracking-widest mt-1">Gratis</span>
+                </div>
+                <div className="flex justify-between text-xl font-bold text-text-heading pt-3">
+                  <span>Total</span>
+                  <span className="text-primary">${getTotalPrice().toFixed(2)}</span>
+                </div>
+              </div>
+
+              <div className="mt-8 p-4 bg-primary/5 rounded-xl border border-primary/10">
+                <p className="text-[10px] text-primary font-bold uppercase tracking-widest text-center">
+                  Pago Seguro 100% Protegido
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="border-t border-gray-200 pt-3 flex justify-between text-lg font-bold text-gray-900">
-            <span>Total</span>
-            <span>${total.toFixed(2)}</span>
-          </div>
-        </aside>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
