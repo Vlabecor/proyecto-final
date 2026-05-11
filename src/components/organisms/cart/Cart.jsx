@@ -3,7 +3,6 @@ import useCartStore from "../../../store/cartStore";
 import { imageMap } from "../../../assets/imageMap";
 
 export default function Cart() {
-  // TODO ESTUDIANTE: agregar cupones, envio y resumen con impuestos.
   const items = useCartStore((state) => state.items);
   const incrementItem = useCartStore((state) => state.incrementItem);
   const decrementItem = useCartStore((state) => state.decrementItem);
@@ -156,5 +155,4 @@ export default function Cart() {
       </div>
     </section>
   );
-}
 }

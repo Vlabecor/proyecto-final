@@ -4,9 +4,17 @@ import ProductRate from "../atoms/product/ProductRate";
 import ProductPrice from "../atoms/product/ProductPrice";
 import { imageMap } from "../../assets/imageMap";
 import { Link } from "react-router-dom";
+import useCartStore from "../../store/cartStore";
 
 function ProductCard({ product }) {
     const resolvedImage = imageMap[product.image] ?? product.image;
+    const addItem = useCartStore((state) => state.addItem);
+
+    const handleAddToCart = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      addItem(product);
+    };
 
     return (
         <Link 
@@ -17,13 +25,23 @@ function ProductCard({ product }) {
             <div className="p-5">
                 <ProductRate rate={product.rate} />
                 <ProductTitle title={product.title} />
-                <ProductPrice price={product.price} />
-                <div className="mt-4 flex items-center text-primary text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    Ver detalle →
+                <div className="flex items-center justify-between mt-2">
+                    <ProductPrice price={product.price} />
+                    <button 
+                        type="button"
+                        onClick={handleAddToCart}
+                        className="bg-primary text-white p-2 rounded-lg hover:bg-text-heading transition-all duration-300 shadow-sm active:scale-90"
+                        title="Añadir al carrito"
+                    >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </Link>
     );
 }
+
 export default ProductCard;
 
