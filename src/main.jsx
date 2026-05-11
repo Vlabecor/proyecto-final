@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from "./components/templates/Layout"
 import Gallery from "./components/organisms/gallery/Gallery"
 import Login from "./components/organisms/login/Login"
@@ -13,7 +13,7 @@ import OrderSuccess from "./components/organisms/checkout/OrderSuccess"
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Navigate to="/gallery" replace />} />
@@ -27,6 +27,6 @@ createRoot(document.getElementById('root')).render(
           <Route path="order-success" element={<OrderSuccess />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>,
 );
