@@ -55,9 +55,9 @@ export default function Cart() {
                   const resolvedImage = imageMap[product.image] ?? product.image;
                   const itemSubtotal = Number(product.price) * Number(quantity);
                   return (
-                    <article key={product.id} className="p-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                      <div className="md:col-span-6 flex gap-6 items-center">
-                        <div className="w-24 h-24 bg-bg-light rounded-xl overflow-hidden flex-shrink-0 border border-gray-50">
+                    <article key={product.id} className="p-4 md:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center">
+                      <div className="md:col-span-6 flex gap-4 md:gap-6 items-center">
+                        <div className="w-20 h-20 md:w-24 md:h-24 bg-bg-light rounded-xl overflow-hidden flex-shrink-0 border border-gray-50">
                           <img
                             src={resolvedImage}
                             alt={product.title}
@@ -116,7 +116,7 @@ export default function Cart() {
 
           {/* Resumen de Compra */}
           <aside className="lg:col-span-4">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 sticky top-28">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 sticky top-28">
               <h3 className="text-xl font-bold text-text-heading mb-8 pb-4 border-b border-gray-50 uppercase tracking-widest text-xs">Resumen de Pedido</h3>
               
               <div className="space-y-4 mb-8">
