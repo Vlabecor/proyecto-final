@@ -42,7 +42,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex items-center justify-center min-h-screen bg-bg-light p-6">
+    <div className="flex items-start justify-center min-h-screen pt-32 bg-bg-light p-6">
       <div className="w-full max-w-md bg-white p-10 rounded-[2rem] shadow-xl shadow-primary/5 border border-gray-100">
 
         {/* Header con Icono */}
