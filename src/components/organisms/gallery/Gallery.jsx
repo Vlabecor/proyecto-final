@@ -15,6 +15,11 @@ export default function Gallery() {
     fetchProducts();
   }, [fetchProducts]);
 
+  // Efecto para volver arriba al cambiar de página
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
   const filteredProducts = useMemo(() => {
     const normalized = searchTerm.trim().toLowerCase();
     
