@@ -22,12 +22,19 @@ export default function Gallery() {
     fetchProducts();
   }, [fetchProducts]);
 
-  // Scroll inteligente: va al inicio de la galería al cambiar de página
+  // Scroll inteligente al cambiar de página
   useEffect(() => {
     if (galleryRef.current && currentPage > 1) {
       galleryRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [currentPage]);
+
+  // Scroll automático al empezar a buscar si el usuario está arriba
+  useEffect(() => {
+    if (searchTerm.length > 0 && window.scrollY < 300) {
+      galleryRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [searchTerm]);
 
   const filteredProducts = useMemo(() => {
     const normalized = searchTerm.trim().toLowerCase();
