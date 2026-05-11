@@ -9,6 +9,7 @@ import Profile from "./components/organisms/profile/Profile"
 import ProductDetail from "./components/organisms/productDetail/ProductDetail"
 import Cart from "./components/organisms/cart/Cart"
 import Checkout from "./components/organisms/checkout/Checkout"
+import OrderSuccess from "./components/organisms/checkout/OrderSuccess"
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -23,8 +24,9 @@ createRoot(document.getElementById('root')).render(
           <Route path="product/:id" element={<ProductDetail />} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="order-success" element={<OrderSuccess />} />
         </Route>
       </Routes>
     </BrowserRouter>
   </StrictMode>,
-)
+);

@@ -1,8 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useCartStore from "../../../store/cartStore";
 
 export default function Checkout() {
-  const { cart, getTotalPrice } = useCartStore();
+  const { items, getTotalPrice, clearCart } = useCartStore();
+  const navigate = useNavigate();
+
+  const handlePayment = (e) => {
+    e.preventDefault();
+    // Simulamos el proceso de pago
+    clearCart();
+    navigate("/order-success");
+  };
 
   return (
     <div className="min-h-screen bg-bg-light pt-32 pb-20">
@@ -85,16 +93,16 @@ export default function Checkout() {
               <h3 className="text-xl font-bold text-text-heading mb-6">Resumen del Pedido</h3>
               
               <div className="space-y-4 mb-8 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                {cart.map((item) => (
-                  <div key={item.id} className="flex items-center gap-4 py-2 border-b border-gray-50 last:border-0">
+                {items.map((item) => (
+                  <div key={item.product.id} className="flex items-center gap-4 py-2 border-b border-gray-50 last:border-0">
                     <div className="w-16 h-16 bg-gray-50 rounded-xl overflow-hidden flex-shrink-0">
-                      <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                      <img src={item.product.image} alt={item.product.title} className="w-full h-full object-cover" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-sm font-bold text-text-heading line-clamp-1">{item.title}</h4>
+                      <h4 className="text-sm font-bold text-text-heading line-clamp-1">{item.product.title}</h4>
                       <p className="text-xs text-gray-400">Cantidad: {item.quantity}</p>
                     </div>
-                    <p className="text-sm font-bold text-primary">${(item.price * item.quantity).toFixed(2)}</p>
+                    <p className="text-sm font-bold text-primary">${(item.product.price * item.quantity).toFixed(2)}</p>
                   </div>
                 ))}
               </div>
@@ -114,7 +122,17 @@ export default function Checkout() {
                 </div>
               </div>
 
-              <div className="mt-8 p-4 bg-primary/5 rounded-xl border border-primary/10">
+              <button
+                onClick={handlePayment}
+                className="w-full primary-btn !py-4 !rounded-xl mt-8 shadow-lg shadow-primary/20 flex items-center justify-center gap-3 active:scale-95 transition-all"
+              >
+                Confirmar y Pagar
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </button>
+
+              <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/10">
                 <p className="text-[10px] text-primary font-bold uppercase tracking-widest text-center">
                   Pago Seguro 100% Protegido
                 </p>
