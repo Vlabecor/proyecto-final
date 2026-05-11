@@ -9,6 +9,7 @@ export default function Gallery() {
   const { products, loading, fetchProducts } = useProductStore();
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   useEffect(() => {
     fetchProducts();
@@ -16,15 +17,21 @@ export default function Gallery() {
 
   const filteredProducts = useMemo(() => {
     const normalized = searchTerm.trim().toLowerCase();
-    if (!normalized) return products;
-
+    
     return products.filter((product) => {
-      return (
+      const matchesSearch = !normalized || 
         product.title.toLowerCase().includes(normalized) ||
-        product.description.toLowerCase().includes(normalized)
-      );
+        product.description.toLowerCase().includes(normalized);
+      
+      const matchesCategory = selectedCategory === "all" || product.category === selectedCategory;
+      
+      return matchesSearch && matchesCategory;
     });
-  }, [products, searchTerm]);
+  }, [products, searchTerm, selectedCategory]);
+
+  const categories = useMemo(() => {
+    return ["all", ...new Set(products.map((p) => p.category))];
+  }, [products]);
 
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / ITEMS_PER_PAGE));
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -68,6 +75,26 @@ export default function Gallery() {
               className="w-full px-5 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300"
             />
           </div>
+        </div>
+
+        <div className="flex flex-wrap gap-3 mb-10">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => {
+                setSelectedCategory(cat);
+                setCurrentPage(1);
+              }}
+              className={`px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 border ${
+                selectedCategory === cat
+                  ? "bg-primary text-white border-primary shadow-lg shadow-primary/20"
+                  : "bg-white text-text-body border-gray-100 hover:border-primary hover:text-primary"
+              }`}
+            >
+              {cat === "all" ? "Todo" : cat}
+            </button>
+          ))}
         </div>
 
         {filteredProducts.length === 0 ? (
