@@ -98,8 +98,30 @@ export default function Gallery() {
         </div>
 
         {filteredProducts.length === 0 ? (
-          <div className="bg-white border border-gray-100 rounded-2xl p-16 text-center text-text-body shadow-sm">
-            No se encontraron productos para esa búsqueda.
+          <div className="bg-white border border-gray-100 rounded-3xl p-20 text-center shadow-sm max-w-2xl mx-auto my-12">
+            <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6 text-gray-300">
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold text-text-heading mb-2">No encontramos lo que buscas</h3>
+            <p className="text-text-body mb-8">
+              Intenta ajustar tus filtros o busca con términos más generales para encontrar lo que necesitas.
+            </p>
+            <button 
+              type="button"
+              onClick={() => {
+                setSearchTerm("");
+                setSelectedCategory("all");
+                setCurrentPage(1);
+              }}
+              className="text-primary font-bold uppercase tracking-widest text-[10px] hover:underline flex items-center gap-2 mx-auto"
+            >
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              Limpiar todos los filtros
+            </button>
           </div>
         ) : (
           <>
