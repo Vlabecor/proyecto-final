@@ -8,6 +8,11 @@ const useProductStore = create(
       products: [],
       loading: false,
       error: null,
+      searchTerm: "",
+      selectedCategory: "all",
+
+      setSearchTerm: (term) => set({ searchTerm: term }),
+      setSelectedCategory: (cat) => set({ selectedCategory: cat }),
       
       fetchProducts: async () => {
         set({ loading: true, error: null });

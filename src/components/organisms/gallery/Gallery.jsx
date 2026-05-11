@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import ProductCard from "../../molecules/ProductCard";
 import useProductStore from "../../../store/productStore";
 import Hero from "../Hero/Hero";
@@ -10,14 +10,17 @@ export default function Gallery() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const galleryRef = useRef(null);
 
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
-  // Efecto para volver arriba al cambiar de página
+  // Scroll inteligente: va al inicio de la galería al cambiar de página
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (galleryRef.current && currentPage > 1) {
+      galleryRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   }, [currentPage]);
 
   const filteredProducts = useMemo(() => {
@@ -62,7 +65,7 @@ export default function Gallery() {
   return (
     <>
       <Hero />
-      <section className="section-padding bg-bg-light min-h-screen">
+      <section ref={galleryRef} className="section-padding bg-bg-light min-h-screen">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
