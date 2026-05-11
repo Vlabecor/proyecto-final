@@ -1,22 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
 import ProductCard from "../../molecules/ProductCard";
-import { getProducts } from "../../../services/productService";
+import useProductStore from "../../../store/productStore";
 
 const ITEMS_PER_PAGE = 4;
-// TODO ESTUDIANTE: ajusta items por pagina y mejora UX de filtros/categorias.
 
 export default function Gallery() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { products, loading, fetchProducts } = useProductStore();
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    getProducts().then((data) => {
-      setProducts(data);
-      setLoading(false);
-    });
-  }, []);
+    fetchProducts();
+  }, [fetchProducts]);
 
   const filteredProducts = useMemo(() => {
     // TODO ESTUDIANTE: extender busqueda por categoria y precio.
