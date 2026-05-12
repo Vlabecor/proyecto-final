@@ -58,43 +58,37 @@ export default function Gallery() {
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const visibleProducts = filteredProducts.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-    setCurrentPage(1);
-  };
-
   const goToPage = (page) => {
     setCurrentPage(page);
   };
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1);
+  };
 
   return (
     <>
       <Hero />
-      <section ref={galleryRef} className="section-padding bg-bg-light min-h-screen">
+      <section ref={galleryRef} className="pt-24 pb-16 md:pt-32 md:pb-24 bg-bg-light min-h-screen">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight text-text-heading">Nuestros Productos</h2>
-              <p className="text-sm text-text-body mt-2">
-                Explora nuestra colección exclusiva ({filteredProducts.length} resultados)
-              </p>
-            </div>
-            <div className="relative w-full md:w-96">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={handleSearchChange}
-                placeholder="Buscar por nombre o descripción..."
-                className="w-full px-5 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300"
-              />
+          <div id="filtros" className="mb-12">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+              <div>
+                <h2 className="text-3xl font-bold tracking-tight text-text-heading">Nuestros Productos</h2>
+                <p className="text-sm text-text-body mt-2">
+                  Explora nuestra colección exclusiva ({filteredProducts.length} resultados)
+                </p>
+              </div>
+              <div className="relative w-full md:w-96">
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  placeholder="Buscar por nombre o descripción..."
+                  className="w-full px-5 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-300 shadow-sm bg-white"
+                />
+              </div>
             </div>
           </div>
 
@@ -108,28 +102,24 @@ export default function Gallery() {
                   setCurrentPage(1);
                 }}
                 className={`px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 border ${selectedCategory === cat
-                    ? "bg-primary text-white border-primary shadow-lg shadow-primary/20"
-                    : "bg-white text-text-body border-gray-100 hover:border-primary hover:text-primary"
+                    ? "bg-primary text-white border-primary shadow-lg scale-105"
+                    : "bg-white text-text-body border-gray-100 hover:border-primary hover:text-primary shadow-sm"
                   }`}
               >
-                {cat === "all" ? "Todo" : cat}
+                {cat === "all" ? "Todos" : cat}
               </button>
             ))}
           </div>
 
-          {filteredProducts.length === 0 ? (
-            <div className="bg-white border border-gray-100 rounded-3xl p-20 text-center shadow-sm max-w-2xl mx-auto my-12">
-              <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6 text-gray-300">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-text-heading mb-2">No encontramos lo que buscas</h3>
-              <p className="text-text-body mb-8">
-                Intenta ajustar tus filtros o busca con términos más generales para encontrar lo que necesitas.
-              </p>
+          {loading ? (
+            <div className="flex flex-col items-center justify-center py-24 gap-4">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+              <p className="text-sm font-bold uppercase tracking-widest text-gray-400">Buscando productos...</p>
+            </div>
+          ) : filteredProducts.length === 0 ? (
+            <div className="text-center py-24 bg-white rounded-3xl border border-gray-100 shadow-sm">
+              <p className="text-xl text-gray-400 mb-6">No encontramos lo que buscas</p>
               <button
-                type="button"
                 onClick={() => {
                   setSearchTerm("");
                   setSelectedCategory("all");
@@ -145,7 +135,7 @@ export default function Gallery() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+              <div id="productos" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
                 {visibleProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}

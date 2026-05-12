@@ -60,7 +60,7 @@ export default function NavBar() {
                     isActive('/gallery') ? 'text-primary' : 'text-text-heading hover:text-primary'
                   } transition-colors duration-300`}
                 >
-                  Home
+                  Inicio
                 </Link>
               </li>
               <li>
@@ -70,7 +70,7 @@ export default function NavBar() {
                     isActive('/cart') ? 'text-primary' : 'text-text-heading hover:text-primary'
                   } transition-colors duration-300 flex items-center gap-2`}
                 >
-                  Cart 
+                  Carrito 
                   {totalItems > 0 && (
                     <span className="bg-primary text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center">
                       {totalItems}
@@ -86,7 +86,7 @@ export default function NavBar() {
                       isActive('/profile') ? 'text-primary' : 'text-text-heading hover:text-primary'
                     } transition-colors duration-300`}
                   >
-                    Profile
+                    Mi Perfil
                   </Link>
                 </li>
               ) : (
@@ -98,7 +98,7 @@ export default function NavBar() {
                         isActive('/login') ? 'text-primary' : 'text-text-heading hover:text-primary'
                       } transition-colors duration-300`}
                     >
-                      Login
+                      Entrar
                     </Link>
                   </li>
                   <li>
@@ -106,7 +106,7 @@ export default function NavBar() {
                       to="/register"
                       className="primary-btn !py-2 !px-6 !text-[10px]"
                     >
-                      Register
+                      Registrarse
                     </Link>
                   </li>
                 </>
@@ -148,16 +148,16 @@ export default function NavBar() {
             </div>
 
             {/* Links in Mobile */}
-            <nav className="px-4">
-              <ul className="space-y-4 text-sm font-bold uppercase tracking-widest text-text-body">
+            <nav className="px-4 pb-8">
+              <ul className="space-y-6 text-sm font-bold uppercase tracking-widest text-text-body text-center">
                 <li>
-                  <Link to="/gallery" onClick={toggleMenu} className="block py-2">Home</Link>
+                  <Link to="/gallery" onClick={toggleMenu} className="block py-2 hover:text-primary transition-colors">Inicio</Link>
                 </li>
                 <li>
-                  <Link to="/cart" onClick={toggleMenu} className="block py-2 flex justify-between items-center">
-                    Cart
+                  <Link to="/cart" onClick={toggleMenu} className="py-2 flex justify-center items-center gap-4 hover:text-primary transition-colors">
+                    <span>Carrito</span>
                     {totalItems > 0 && (
-                      <span className="bg-primary text-white text-[10px] rounded-full h-5 w-5 flex items-center justify-center">
+                      <span className="bg-primary text-white text-[10px] rounded-full h-6 w-6 flex items-center justify-center shadow-lg">
                         {totalItems}
                       </span>
                     )}
@@ -165,15 +165,15 @@ export default function NavBar() {
                 </li>
                 {loggedInUser ? (
                   <li>
-                    <Link to="/profile" onClick={toggleMenu} className="block py-2">Profile</Link>
+                    <Link to="/profile" onClick={toggleMenu} className="block py-2 hover:text-primary transition-colors">Mi Perfil</Link>
                   </li>
                 ) : (
                   <>
                     <li>
-                      <Link to="/login" onClick={toggleMenu} className="block py-2">Login</Link>
+                      <Link to="/login" onClick={toggleMenu} className="block py-2 hover:text-primary transition-colors">Entrar</Link>
                     </li>
-                    <li>
-                      <Link to="/register" onClick={toggleMenu} className="primary-btn !w-full text-center mt-4">Register</Link>
+                    <li className="pt-4">
+                      <Link to="/register" onClick={toggleMenu} className="primary-btn !w-full inline-block text-center shadow-lg">Registrarse</Link>
                     </li>
                   </>
                 )}

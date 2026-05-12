@@ -77,11 +77,11 @@ export default function ProductDetail() {
                     {/* Image */}
                     <div className="md:w-1/2 relative">
                         <img
-                            src={resolvedImage}
+                            src={product.image}
                             alt={product.title}
                             className="w-full h-80 md:h-full object-cover"
                         />
-                        <div className="absolute top-4 left-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                        <div className="absolute top-4 left-4 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                             NUEVO
                         </div>
                     </div>
@@ -89,7 +89,7 @@ export default function ProductDetail() {
                     {/* Info */}
                     <div className="md:w-1/2 p-8 flex flex-col justify-between">
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.title}</h1>
+                            <h1 className="text-3xl font-bold text-text-heading mb-2 tracking-tight">{product.title}</h1>
 
                             {/* Rating */}
                             <div className="flex items-center gap-2 mb-4">
@@ -98,12 +98,12 @@ export default function ProductDetail() {
                             </div>
 
                             {/* Price */}
-                            <p className="text-4xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent mb-6">
+                            <p className="text-4xl font-extrabold text-primary mb-6 tracking-tighter">
                                 ${product.price}
                             </p>
 
                             {/* Description */}
-                            <p className="text-gray-600 leading-relaxed mb-8">
+                            <p className="text-text-body leading-relaxed mb-8 text-sm">
                                 {product.description}
                             </p>
                         </div>
@@ -111,20 +111,20 @@ export default function ProductDetail() {
                         <div className="space-y-4">
                             {/* Quantity selector */}
                             <div className="flex items-center gap-4">
-                                <span className="text-sm font-medium text-gray-700">Cantidad:</span>
-                                <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                                <span className="text-sm font-bold uppercase tracking-widest text-gray-400">Cantidad:</span>
+                                <div className="flex items-center border border-gray-100 rounded-full overflow-hidden bg-bg-light p-1">
                                     <button
                                         onClick={() => setQuantity(q => Math.max(1, q - 1))}
-                                        className="w-10 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors text-lg font-bold"
+                                        className="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary transition-colors text-lg font-bold bg-white rounded-full shadow-sm"
                                     >
                                         −
                                     </button>
-                                    <span className="w-12 text-center font-semibold text-gray-900">
+                                    <span className="w-12 text-center font-bold text-text-heading">
                                         {quantity}
                                     </span>
                                     <button
                                         onClick={() => setQuantity(q => q + 1)}
-                                        className="w-10 h-10 flex items-center justify-center text-gray-600 hover:bg-gray-100 transition-colors text-lg font-bold"
+                                        className="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary transition-colors text-lg font-bold bg-white rounded-full shadow-sm"
                                     >
                                         +
                                     </button>
@@ -134,12 +134,12 @@ export default function ProductDetail() {
                             {/* Add to cart button */}
                             <button
                                 onClick={handleAddToCart}
-                                className={`w-full py-3 rounded-xl font-semibold text-white text-lg transition-all duration-300 ${added
-                                        ? 'bg-green-500 scale-95'
-                                        : 'bg-gradient-to-r from-purple-500 via-purple-600 to-pink-500 hover:opacity-90 hover:shadow-lg hover:shadow-purple-200 active:scale-95'
+                                className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest text-[11px] transition-all duration-300 shadow-lg ${added
+                                        ? 'bg-green-500 text-white scale-95'
+                                        : 'bg-primary text-white hover:bg-white hover:text-primary border border-primary shadow-primary/20 cursor-pointer active:scale-95'
                                     }`}
                             >
-                                {added ? '✓ Agregado al carrito' : 'Agregar al carrito'}
+                                {added ? '✓ Añadido con éxito' : 'Añadir al Carrito'}
                             </button>
                         </div>
                     </div>
