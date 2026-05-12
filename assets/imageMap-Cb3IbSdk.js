@@ -1,0 +1,1 @@
+var e={"01_item.jpg":`/proyecto-final/assets/01_item-CZXPVtVw.jpg`,"02_item.jpg":`/proyecto-final/assets/02_item-Bg_-31kg.jpg`,"03_item.jpg":`/proyecto-final/assets/03_item-B617TrO-.jpg`,"04_item.jpg":`/proyecto-final/assets/04_item-BUaYJ6RJ.jpg`,"05_item.jpg":`/proyecto-final/assets/05_item-DT7GhXsj.jpg`};export{e as t};
